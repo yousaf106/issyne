@@ -3,7 +3,8 @@ export const colors = {
     facebookBlue:'#3b5998',
     googleRed:'#DB4437',
     pink:'#FC4F85',
-    liveGreen:'#46AC07'
+    liveGreen:'#46AC07',
+    darkGray :'#707070',
 };
 export const fonts = {
     regular:'NeoGramRegular',

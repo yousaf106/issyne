@@ -113,6 +113,13 @@ export default function App () {
           },
         })}
       >
+          <Tab.Screen
+          name="Courses"
+          options={{
+            tabBarLabel: 'Courses',
+          }}
+          component={Courses}
+        />
         <Tab.Screen
           name="Find"
           options={{
@@ -120,13 +127,7 @@ export default function App () {
           }}
           component={Find}
         />
-        <Tab.Screen
-          name="Courses"
-          options={{
-            tabBarLabel: 'Courses',
-          }}
-          component={Courses}
-        />
+      
 
         <Tab.Screen
           name="Coin"

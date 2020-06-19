@@ -8,40 +8,74 @@ export default function box({
   checked = false,
   label = '',
   onPress = null,
-  placeholder = 'Placeholder',
-  helperText = 'Helper',
-  underlineColor = colors.primary,
-  onChangeText = null,
-  floatngTextColor = colors.primary,
-  placeholderColor = colors.primary,
+  labelSize = 14,
+  checboxSize = 13,
+  checkedColor = colors.primary,
+  idleColor = 'black',
+  isFlex = true,
 }) {
+
+  if(isFlex)
   return (
-    <TouchableOpacity onPress={onPress} row flex left>
+    <TouchableOpacity 
+    onPress={onPress} row  left flex >
       <Checkbox
         value={checked}
         onValueChange={onValueChanged}
         borderRadius={3}
         style={{marginTop: 3, borderColor: 'gray', borderWidth: 1.5}}
-        size={13}
-        color={checked ? colors.primary : 'black'}
-        iconColor={colors.primary}
+        size={checboxSize}
+        color={checked ? checkedColor :idleColor}
+        iconColor={checkedColor}
       />
       <Text
         style={
           checked
             ? {
-                color: colors.primary,
+                color: checkedColor,
                 marginStart: 5,
-                fontSize: RFValue (14),
-                fontWeight: 'bold',
-                letterSpacing: 1.5,
+                fontSize: RFValue (labelSize),
+                fontFamily:fonts.arial,
               }
             : {
-                color: 'black',
+                color: idleColor,
                 marginStart: 5,
-                fontSize: RFValue (14),
-                fontWeight: 'bold',
-                letterSpacing: 1.5,
+                fontSize: RFValue (labelSize),
+                fontFamily:fonts.arial,
+              }
+        }
+      >
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+
+  return (
+    <TouchableOpacity 
+    onPress={onPress} row  left >
+      <Checkbox
+        value={checked}
+        onValueChange={onValueChanged}
+        borderRadius={3}
+        style={{marginTop: 3, borderColor: 'gray', borderWidth: 1.5}}
+        size={checboxSize}
+        color={checked ? checkedColor :idleColor}
+        iconColor={checkedColor}
+      />
+      <Text
+        style={
+          checked
+            ? {
+                color: checkedColor,
+                marginStart: 5,
+                fontSize: RFValue (labelSize),
+                fontFamily:fonts.arial,
+              }
+            : {
+                color: idleColor,
+                marginStart: 5,
+                fontSize: RFValue (labelSize),
+                fontFamily:fonts.arial,
               }
         }
       >

@@ -1,4 +1,4 @@
-import React, {Component,Image} from 'react';
+import React, {Component, Image} from 'react';
 import {Button} from 'react-native-ui-lib';
 import {colors, fonts, margin} from '../globals/Styles';
 import {RFValue} from 'react-native-responsive-fontsize';
@@ -16,7 +16,11 @@ export default function ButtonLarge({
       text65
       white
       label={label}
-      labelStyle={{fontFamily: fonts.buttonBold, fontSize: RFValue (18),color:'white'}}
+      labelStyle={{
+        fontFamily: fonts.buttonBold,
+        fontSize: RFValue (18),
+        color: 'white',
+      }}
       onPress={onPress}
     />
   );
