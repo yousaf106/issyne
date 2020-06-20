@@ -31,7 +31,7 @@ const navigationStack = () => (
           color: 'white',
           alignSelf:'center',
         },
-        title: 'Fina a teacher',
+        title: 'Find a teacher',
       })}
       name="CourseNavigator"
       component={CourseNavigator}

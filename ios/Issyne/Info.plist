@@ -80,6 +80,8 @@
 		<string>SFUITextMedium.ttf</string>
 		<string>arialbd.ttf</string>
 		<string>Arial.ttf</string>
+		<string>ArialItalic.ttf</string>
+		<string>AvenirLTStdRoman.otf</string>
 	</array>
 </dict>
 </plist>

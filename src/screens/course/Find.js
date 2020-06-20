@@ -250,11 +250,12 @@ export default class Find extends Component {
                   <Text style = {styles.teacherProfileHeading}>Cost:</Text>
                   <Text style = {styles.teacherProfileText}>5$</Text>          
                   <Text style = {styles.teacherProfileHeading}>Payment Method:</Text>
-        
+                  
                   <MoalField
                     fullWidth={true}
                     isMarginBottom={true}
                     placeholder="Create de credit ********4331"
+                    makeNarrow = {true}
                   />
                      <ButtonSmall
                     bgColor={colors.pink}

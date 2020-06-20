@@ -3,17 +3,21 @@ import {Button} from 'react-native-ui-lib';
 import {colors, fonts} from '../globals/Styles';
 import {RFValue} from 'react-native-responsive-fontsize';
 
-export default function ButtonMeduimOutline({
+export default function ButtonSmallOutline({
   label = '',
   labelColor = colors.primary,
   outlineColor = colors.primary,
   onPress = null,
-  fontFamily = fonts.sfuiTextMeduim,
+  fontFamily = fonts.arialBold,
+  height = 40.1,
+  width = '90%',
+  labelSize = RFValue(16),
+
 }) {
   return (
     <Button
       borderRadius={5}
-      style={{width: '38%', height: 50}}
+      style={{width: width, height: height}}
       text65
       black
       outline={true}
@@ -22,7 +26,7 @@ export default function ButtonMeduimOutline({
       onPress={onPress}
       labelStyle={{
         fontFamily: fontFamily,
-        fontSize: RFValue (18),
+        fontSize:labelSize,
         color: labelColor,
       }}
       outlineWidth={3}

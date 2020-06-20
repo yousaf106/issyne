@@ -41,6 +41,8 @@
 		1C5CA2F4862E4BF1800B1190 /* SFUITextMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D6F253679EA4AA48A7BF1C8 /* SFUITextMedium.ttf */; };
 		406D26ECF7904B4AAB91F3CA /* arialbd.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E343D6EEAF074909B128C40D /* arialbd.ttf */; };
 		D838ED8275FC42ADA90F80F5 /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 146A7CD38FD5494D831E21BD /* Arial.ttf */; };
+		F35C0DD9BD214A01A3D4148B /* ArialItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE6BC3518B9B40AABCC37C14 /* ArialItalic.ttf */; };
+		FA6064946914497FB3BF999B /* AvenirLTStdRoman.otf in Resources */ = {isa = PBXBuildFile; fileRef = 204B3D62F3264BD2A66F8C02 /* AvenirLTStdRoman.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		9D6F253679EA4AA48A7BF1C8 /* SFUITextMedium.ttf */ = {isa = PBXFileReference; name = "SFUITextMedium.ttf"; path = "../assets/fonts/SFUITextMedium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		E343D6EEAF074909B128C40D /* arialbd.ttf */ = {isa = PBXFileReference; name = "arialbd.ttf"; path = "../assets/fonts/arialbd.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		146A7CD38FD5494D831E21BD /* Arial.ttf */ = {isa = PBXFileReference; name = "Arial.ttf"; path = "../assets/fonts/Arial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AE6BC3518B9B40AABCC37C14 /* ArialItalic.ttf */ = {isa = PBXFileReference; name = "ArialItalic.ttf"; path = "../assets/fonts/ArialItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		204B3D62F3264BD2A66F8C02 /* AvenirLTStdRoman.otf */ = {isa = PBXFileReference; name = "AvenirLTStdRoman.otf"; path = "../assets/fonts/AvenirLTStdRoman.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +240,8 @@
 				9D6F253679EA4AA48A7BF1C8 /* SFUITextMedium.ttf */,
 				E343D6EEAF074909B128C40D /* arialbd.ttf */,
 				146A7CD38FD5494D831E21BD /* Arial.ttf */,
+				AE6BC3518B9B40AABCC37C14 /* ArialItalic.ttf */,
+				204B3D62F3264BD2A66F8C02 /* AvenirLTStdRoman.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -404,6 +410,8 @@
 				1C5CA2F4862E4BF1800B1190 /* SFUITextMedium.ttf in Resources */,
 				406D26ECF7904B4AAB91F3CA /* arialbd.ttf in Resources */,
 				D838ED8275FC42ADA90F80F5 /* Arial.ttf in Resources */,
+				F35C0DD9BD214A01A3D4148B /* ArialItalic.ttf in Resources */,
+				FA6064946914497FB3BF999B /* AvenirLTStdRoman.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

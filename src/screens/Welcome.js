@@ -5,7 +5,7 @@ import ButtonMedium from '../components/ButtonMedium';
 import ButtonMediumOutline from '../components/ButtonMediumOutline';
 
 import Heading from '../components/Heading';
-import {colors} from '../globals/Styles';
+import {fonts} from '../globals/Styles';
 export default class Welcome extends Component {
   render () {
     return (
@@ -14,8 +14,13 @@ export default class Welcome extends Component {
           <Heading title="WELCOME" />
           <View center>
             <Image
-              source={require ('../../res/images/welcome_img.jpg')}
-              style={{width: '100%', height: 250, resizeMode: 'cover',marginTop:60}}
+              source={require ('../../res/images/welcome_img.png')}
+              style={{
+                width: '100%',
+                height: 320,
+                resizeMode: 'cover',
+                marginTop: 60,
+              }}
             />
           </View>
         </View>
@@ -23,17 +28,20 @@ export default class Welcome extends Component {
           style={{
             flexDirection: 'row',
             justifyContent: 'center',
-            bottom:0,
-            marginBottom:70,
+            bottom: 0,
+            marginBottom: 70,
           }}
         >
-          <ButtonMedium 
-          onPress = {()=>this.props.navigation.navigate('Registration')}
-          label={'Register'} />
+          <ButtonMedium
+            onPress={() => this.props.navigation.navigate ('Registration')}
+            label={'Register'}
+            isWidthFixed={true}
+          />
           <View style={{width: 10}} />
-          <ButtonMediumOutline 
-          onPress = {()=>this.props.navigation.navigate('Login')}
-          label={'Login'} />
+          <ButtonMediumOutline
+            onPress={() => this.props.navigation.navigate ('Login')}
+            label={'Login'}
+          />
         </View>
       </View>
     );

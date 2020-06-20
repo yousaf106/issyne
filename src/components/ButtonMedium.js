@@ -9,6 +9,7 @@ export default function ButtonMeduim({
   onPress = null,
   isWidthFixed = false,
   labelSize = null,
+  fontFamily = fonts.sfuiTextMeduim,
 }) {
   if (isWidthFixed)
     return (
@@ -20,7 +21,7 @@ export default function ButtonMeduim({
         white
         label={label}
         labelStyle={{
-          fontFamily: fonts.buttonBold,
+          fontFamily: fontFamily,
           fontSize: labelSize === null ? RFValue (18) : RFValue (labelSize),
         }}
         onPress={onPress}

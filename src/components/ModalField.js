@@ -9,11 +9,14 @@ export default function ModalField({
   placeholderColor = colors.primary,
   isMarginBottom = false,
   fullWidth = false,
+  makeNarrow = false,
+  fixedWidth = null,
 }) {
   return (
     <View
       style={{
         marginTop: margin.vertical,
+        
       }}
     >
 
@@ -24,8 +27,8 @@ export default function ModalField({
           borderColor: colors.darkGray,
           paddingStart: 3,
           marginBottom:isMarginBottom ? -20 :0,
-          width: fullWidth ? '100%':null,
-       
+          width: fullWidth ? '100%':fixedWidth,
+          height: makeNarrow ? 22 :null,
         }}
         placeholder={placeholder}
         expandable={true}

@@ -27,7 +27,7 @@ export default function App () {
           inactiveTintColor: '#707070',
           style: {
             backgroundColor: 'white',
-            height: 90,
+            height: 85,
 
             paddingTop: 5,
             paddingBottom: 5,
@@ -38,7 +38,7 @@ export default function App () {
             textAlign: 'center',
             fontSize: RFValue (12),
             fontFamily: fonts.arialBold,
-            marginTop:5,
+            marginTop: 5,
           },
           indicatorStyle: {
             borderBottomColor: '#87B56A',
@@ -62,11 +62,10 @@ export default function App () {
                 <Image
                   source={require ('../../../res/images/find.png')}
                   style={{
-                    width: 90,
-                    height: 90,
+                    width: 80,
+                    height: 80,
                     tintColor: color,
                     resizeMode: 'contain',
-                    marginTop: 5,
                   }}
                 />
               );
@@ -75,8 +74,8 @@ export default function App () {
                 <Image
                   source={require ('../../../res/images/course.png')}
                   style={{
-                    width: 60,
-                    height: 60,
+                    width: 55,
+                    height: 55,
                     marginTop: 5,
                     tintColor: color,
                     resizeMode: 'contain',
@@ -88,8 +87,8 @@ export default function App () {
                 <Image
                   source={require ('../../../res/images/coins.png')}
                   style={{
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     marginTop: 5,
                     tintColor: color,
                     resizeMode: 'contain',
@@ -102,8 +101,8 @@ export default function App () {
                 <Image
                   source={require ('../../../res/images/settings.png')}
                   style={{
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                     marginTop: 5,
                     tintColor: color,
                     resizeMode: 'contain',
@@ -113,13 +112,7 @@ export default function App () {
           },
         })}
       >
-          <Tab.Screen
-          name="Courses"
-          options={{
-            tabBarLabel: 'Courses',
-          }}
-          component={Courses}
-        />
+
         <Tab.Screen
           name="Find"
           options={{
@@ -127,7 +120,13 @@ export default function App () {
           }}
           component={Find}
         />
-      
+        <Tab.Screen
+          name="Courses"
+          options={{
+            tabBarLabel: 'Courses',
+          }}
+          component={Courses}
+        />
 
         <Tab.Screen
           name="Coin"

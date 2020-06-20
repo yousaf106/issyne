@@ -8,10 +8,10 @@ export default function box({
   checked = false,
   label = '',
   onPress = null,
-  labelSize = 14,
+  labelSize = 13,
   checboxSize = 13,
   checkedColor = colors.primary,
-  idleColor = 'black',
+  idleColor = '#070606',
   isFlex = true,
 }) {
 
@@ -35,12 +35,15 @@ export default function box({
                 color: checkedColor,
                 marginStart: 5,
                 fontSize: RFValue (labelSize),
-                fontFamily:fonts.arial,
+                letterSpacing:1.2,
+                fontFamily:fonts.arialBold,
+
               }
             : {
                 color: idleColor,
                 marginStart: 5,
                 fontSize: RFValue (labelSize),
+                letterSpacing:1.2,
                 fontFamily:fonts.arial,
               }
         }

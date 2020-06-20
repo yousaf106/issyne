@@ -16,6 +16,8 @@ export const fonts = {
     sfuiTextMeduim:'SFUITextMedium',
     arialBold:'arialbd',
     arial:'Arial',
+    airalItalic:'ArialItalic',
+    avenRomam:'AvenirLTStdRoman',
 };
 export const padding = {
     

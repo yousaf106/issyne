@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Avatar} from 'react-native-ui-lib';
+import {Text, View, Avatar, TouchableOpacity} from 'react-native-ui-lib';
 import {colors, fonts, margin} from '../globals/Styles';
 import {RFValue} from 'react-native-responsive-fontsize';
 
@@ -10,13 +10,24 @@ export default function avatar({
   isMiddle = true,
   fontSize = null,
   marginStart = null,
+  labelCenter = false,
   source = require ('../../res/images/avatar.png'),
+  labelColor = 'black',
+  fontFamily = fonts.arial,
+  customImageSize = null,
+  customLabelSize = null,
 }) {
   return (
     <View>
       <Avatar
         source={source}
-        size={sizeLarge ? 93 : 0 || sizeMedium ? 65 : 0}
+        size={
+          sizeLarge
+            ? 93
+            : 0 || sizeMedium
+                ? 65
+                : 0 || customImageSize != null ? customImageSize : 0
+        }
         containerStyle={{
           alignSelf: isMiddle ? 'center' : 'flex-start',
           marginStart: marginStart != null ? marginStart : 0,
@@ -25,13 +36,16 @@ export default function avatar({
       <Text
         style={{
           marginTop: margin.vertical,
-          color: 'black',
+          color: labelColor,
           fontSize: fontSize != null
             ? fontSize
             : 0 || sizeLarge
                 ? RFValue (15)
-                : RFValue (0) || sizeMedium ? RFValue (12) : 0,
-          fontFamily: fonts.arial,
+                : RFValue (0) || sizeMedium
+                    ? RFValue (12)
+                    : 0 || customLabelSize != null ? customLabelSize : 0,
+          fontFamily: fontFamily,
+          textAlign: labelCenter ? 'center' : null,
         }}
       >
         {label}
