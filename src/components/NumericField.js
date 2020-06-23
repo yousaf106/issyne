@@ -10,23 +10,37 @@ export default function NumericField({
   onChangeText = null,
   floatngTextColor = colors.primary,
   placeholderColor = colors.primary,
+  onFocus = null,
+  onEmptyError = null,
+  error = '',
+  value = '',
+  maxLength = null,
 }) {
   return (
     <View style={{marginTop: -30}}>
 
       <TextField
+      value = {value}
         style={{fontFamily: fonts.sfuiTextMeduim}}
         placeholder={placeholder}
         expandable={false}
         floatingPlaceholder={true}
         dark10
+        maxLength = {maxLength}
         helperText={helperText}
         underlineColor={underlineColor}
         placeholderTextColor={placeholderColor}
         floatingPlaceholderColor={floatngTextColor}
         floatOnFocus={true}
-        onChangeText={onChangeText}
+        onChangeText={text => {
+          onChangeText (text);
+          if (onEmptyError != null) {
+            onEmptyError (text.length === 0);
+          }
+        }}
         keyboardType="numeric"
+        error={error}
+        onFocus={onFocus}
       />
     </View>
   );

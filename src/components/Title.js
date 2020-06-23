@@ -8,10 +8,10 @@ export default function title({title = '', centered = false}) {
       color={colors.primary}
       center={centered}
       style={{
-        fontFamily: fonts.bold,
+        fontFamily: fonts.arialBold,
         letterSpacing: 3,
-        fontSize: RFValue (13),
-        fontWeight:'bold',
+        fontSize: RFValue (16),
+      
         marginTop:margin.vertical,
     }}
     >

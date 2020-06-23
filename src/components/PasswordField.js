@@ -10,6 +10,9 @@ export default function PasswordField({
   onChangeText = null,
   floatngTextColor = colors.primary,
   placeholderColor = colors.primary,
+  error = '',
+  onFocus = null,
+  onEmptyPasswordError = null,
 }) {
   return (
     <View style = {{marginTop:-20}}>
@@ -26,7 +29,14 @@ export default function PasswordField({
         placeholderTextColor={placeholderColor}
         floatingPlaceholderColor={floatngTextColor}
         floatOnFocus={true}
-        onChangeText={onChangeText}
+        onChangeText={(text)=>{
+          onChangeText(text);
+          if(onEmptyPasswordError!=null){
+            onEmptyPasswordError(text.length === 0)
+          }
+        }}
+        error = {error}
+        onFocus = {onFocus}
       />
     </View>
   );

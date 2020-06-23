@@ -26,11 +26,13 @@ export default class Coins extends Component {
             <Text style = {styles.coinsText}>Coins</Text>
           </View>
        
-          <Text style={[styles.heading,{marginTop:20}]}>
+          <Text style={[styles.heading,{marginTop:40}]}>
             Buy:
           </Text>
 
-
+          <View
+          style = {{marginTop:5}}
+          />
           <TouchableOpacity
           style = {styles.buttonContainer}
           > 

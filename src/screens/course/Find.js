@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 import {ScrollView, Text, StyleSheet, FlatList} from 'react-native';
-import {
-  View,
-  Image,
-  Modal,
-  TouchableOpacity,
-} from 'react-native-ui-lib';
+import {View, Image, Modal, TouchableOpacity} from 'react-native-ui-lib';
 import FilterButton from '../../components/ButtonRoundedMedium';
 import MoalField from '../../components/ModalField';
 
@@ -63,10 +58,10 @@ export default class Find extends Component {
                       <View style={{marginStart: 15}}>
                         <Avatar
                           source={require ('../../../res/images/avatar.png')}
-                          sizeMedium = {true}
-                          label = {'Xavier Bertand'}
+                          sizeMedium={true}
+                          label={'Xavier Bertand'}
                         />
-                        </View>
+                      </View>
                     </View>
                   </View>
                   <View flex style={{flex: 1, justifyContent: 'center'}}>
@@ -225,42 +220,52 @@ export default class Find extends Component {
 
                   <Avatar
                     source={require ('../../../res/images/avatar.png')}
-                    sizeLarge = {true}
-                    label = {'Nick Thomas'}  
+                    sizeLarge={true}
+                    label={'Nick Thomas'}
                   />
                   <Text
-                  style = {{
-                    color:'#565656',
-                    fontFamily:fonts.arial,
-                    fontSize:RFValue(10),
-                  }}
-                  >Note 4.2/5</Text>
+                    style={{
+                      color: '#565656',
+                      fontFamily: fonts.arial,
+                      fontSize: RFValue (10),
+                    }}
+                  >
+                    Note 4.2/5
+                  </Text>
                   <Text
-                  style = {{
-                    color:'#282828',
-                    fontFamily:fonts.arial,
-                    fontSize:RFValue(18),
-                    marginTop:margin.vertical,
-                  }}
-                  >Mathematics/Physics</Text>
-                  <Text style = {styles.teacherProfileHeading}>Course Length:</Text>
-                  <Text style = {styles.teacherProfileText}>15 minutes (Possibility to extend)</Text>
-                  <Text style = {styles.teacherProfileHeading}>My Credits:</Text>
-                  <Text style = {styles.teacherProfileText}>You don't have any credits</Text>
-                  <Text style = {styles.teacherProfileHeading}>Cost:</Text>
-                  <Text style = {styles.teacherProfileText}>5$</Text>          
-                  <Text style = {styles.teacherProfileHeading}>Payment Method:</Text>
-                  
+                    style={{
+                      color: '#282828',
+                      fontFamily: fonts.arial,
+                      fontSize: RFValue (18),
+                      marginTop: margin.vertical,
+                    }}
+                  >
+                    Mathematics/Physics
+                  </Text>
+                  <Text style={styles.teacherProfileHeading}>
+                    Course Length:
+                  </Text>
+                  <Text style={styles.teacherProfileText}>
+                    15 minutes (Possibility to extend)
+                  </Text>
+                  <Text style={styles.teacherProfileHeading}>My Credits:</Text>
+                  <Text style={styles.teacherProfileText}>
+                    You don't have any credits
+                  </Text>
+                  <Text style={styles.teacherProfileHeading}>Cost:</Text>
+                  <Text style={styles.teacherProfileText}>5$</Text>
+                  <Text style={styles.teacherProfileHeading}>
+                    Payment Method:
+                  </Text>
+
                   <MoalField
-                    fullWidth={true}
+                    fullWidth={false}
+                    fixedWidth={'70%'}
                     isMarginBottom={true}
                     placeholder="Create de credit ********4331"
-                    makeNarrow = {true}
+                    makeNarrow={false}
                   />
-                     <ButtonSmall
-                    bgColor={colors.pink}
-                    label={'Pay'}
-                  />
+                  <ButtonSmall bgColor={colors.pink} label={'Pay'} />
 
                 </View>
               </View>
@@ -339,15 +344,15 @@ const styles = StyleSheet.create ({
     fontFamily: fonts.arialBold,
     fontSize: RFValue (12),
   },
-  teacherProfileHeading:{
-    color:'#565656',
-    fontFamily:fonts.arialBold,
-    fontSize:RFValue(13),
-    marginTop:margin.vertical,
+  teacherProfileHeading: {
+    color: '#565656',
+    fontFamily: fonts.arialBold,
+    fontSize: RFValue (13),
+    marginTop: margin.vertical,
   },
-  teacherProfileText:{
-    color:'#565656',
-    fontFamily:fonts.arial,
-    fontSize:RFValue(13),
+  teacherProfileText: {
+    color: '#565656',
+    fontFamily: fonts.arial,
+    fontSize: RFValue (13),
   },
 });

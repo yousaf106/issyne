@@ -35,7 +35,7 @@ export default function box({
                 color: checkedColor,
                 marginStart: 5,
                 fontSize: RFValue (labelSize),
-                letterSpacing:1.2,
+                letterSpacing:1.4,
                 fontFamily:fonts.arialBold,
 
               }
@@ -43,7 +43,7 @@ export default function box({
                 color: idleColor,
                 marginStart: 5,
                 fontSize: RFValue (labelSize),
-                letterSpacing:1.2,
+                letterSpacing:1.4,
                 fontFamily:fonts.arial,
               }
         }

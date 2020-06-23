@@ -46,7 +46,7 @@ export default class PageThree extends Component {
           }}
           showsVerticalScrollIndicator={false}
         >
-          <View style={{height: 60}} />
+          <View style={{height: 40}} />
           <Heading title="REGISTER" />
           <View center style={{marginTop: margin.vertical}}>
             <Text
@@ -59,8 +59,9 @@ export default class PageThree extends Component {
               (3/3)
             </Text>
           </View>
+             <View style = {{marginTop:30}}/> 
           <Title title="You want to provide course for:" />
-          <View row style={{flexDirection: 'row', marginTop: margin.vertical}}>
+          <View row style={{flexDirection: 'row', marginTop: 20}}>
             <CheckBox
               checked={this.state.primitiveSelected}
               onValueChanged={primitiveSelected =>
@@ -79,7 +80,8 @@ export default class PageThree extends Component {
                 this.setState ({lyceeSelected: !this.state.lyceeSelected})}
             />
           </View>
-          <View row style={{flexDirection: 'row', marginTop: margin.vertical}}>
+         
+          <View row style={{flexDirection: 'row', marginTop: 15}}>
             <CheckBox
               checked={this.state.collegeSelected}
               onPress={() =>
@@ -98,8 +100,12 @@ export default class PageThree extends Component {
             />
           </View>
 
+
+          <View style = {{marginTop:30}}/> 
+
+
           <Title title="Metrics You want to teach:" />
-          <View row style={{flexDirection: 'row', marginTop: margin.vertical}}>
+          <View row style={{flexDirection: 'row', marginTop: 20}}>
             <CheckBox
               onPress={() =>
                 this.setState ({
@@ -119,7 +125,7 @@ export default class PageThree extends Component {
               label="Physice"
             />
           </View>
-          <View row style={{flexDirection: 'row', marginTop: margin.vertical}}>
+          <View row style={{flexDirection: 'row', marginTop: 15}}>
             <CheckBox
               onPress={() =>
                 this.setState ({svtSelected: !this.state.svtSelected})}
@@ -137,7 +143,7 @@ export default class PageThree extends Component {
             />
           </View>
 
-          <View row style={{flexDirection: 'row', marginTop: margin.vertical}}>
+          <View row style={{flexDirection: 'row', marginTop: 15}}>
             <CheckBox
               onPress={() =>
                 this.setState ({
@@ -159,8 +165,10 @@ export default class PageThree extends Component {
               label="Matter6"
             />
           </View>
+          <View style = {{marginTop:30}}/> 
 
           <Title title="Documents to upload:" />
+          <View style = {{marginTop:20}}/> 
 
           <UploadDocumentButton
             headingText="ID Card"
@@ -169,6 +177,8 @@ export default class PageThree extends Component {
               if (uri != null) console.warn (uri);
             }}
           />
+                    <View style = {{marginTop:10}}/> 
+
           <UploadDocumentButton
             headingText="K-Bis"
             subHeadingText="0 document uploaded"
@@ -176,6 +186,8 @@ export default class PageThree extends Component {
               if (uri != null) console.warn (uri);
             }}
           />
+                    <View style = {{marginTop:10}}/> 
+
           <UploadDocumentButton
             headingText="Diploma"
             subHeadingText="0 document uploaded"
@@ -183,6 +195,9 @@ export default class PageThree extends Component {
               if (uri != null) console.warn (uri);
             }}
           />
+
+<View style = {{marginTop:20}}/> 
+
           <View center>
             <ButtonLarge
               onPress={() => this.props.navigation.navigate ('PageThree')}

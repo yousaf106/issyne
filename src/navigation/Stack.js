@@ -15,23 +15,63 @@ import PageThreeTeacher from '../screens/register/Teacher/PageThree';
 import Registration from '../screens/register/Registration';
 import CourseNavigator from '../screens/course/BottomNavigator';
 import {colors} from '../globals/Styles';
+import Splash from '../screens/Splash';
+import {fromLeft} from 'react-navigation-transitions';
+
+const config = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};
 const Stack = createStackNavigator ();
 
 const navigationStack = () => (
   <Stack.Navigator>
 
+<Stack.Screen
+      options={({navigation}) => ({
+        headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
+      })}
+      name="Splash"
+      component={Splash}
+    />
+
+
     <Stack.Screen
       options={({navigation}) => ({
-        
+        headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
+      })}
+      name="Registration"
+      component={Registration}
+    />
+
+    <Stack.Screen
+      options={({navigation}) => ({
         headerStyle: {
           backgroundColor: colors.primary,
         },
-        
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
         headerTitleStyle: {
           color: 'white',
-          alignSelf:'center',
+          alignSelf: 'center',
         },
-        title: 'Find a teacher',
       })}
       name="CourseNavigator"
       component={CourseNavigator}
@@ -40,14 +80,10 @@ const navigationStack = () => (
     <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
-      })}
-      name="Registration"
-      component={Registration}
-    />
-
-    <Stack.Screen
-      options={({navigation}) => ({
-        headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
       })}
       name="PageOneTeacher"
       component={PageOneTeacher}
@@ -56,6 +92,10 @@ const navigationStack = () => (
     <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
       })}
       name="PageTwoTeacher"
       component={PageTwoTeacher}
@@ -63,6 +103,10 @@ const navigationStack = () => (
     <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
       })}
       name="PageThreeTeacher"
       component={PageThreeTeacher}
@@ -71,6 +115,10 @@ const navigationStack = () => (
     <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
       })}
       name="PageOneStudent"
       component={PageOneStudent}
@@ -79,6 +127,10 @@ const navigationStack = () => (
     <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
       })}
       name="PageTwoStudent"
       component={PageTwoStudent}
@@ -87,6 +139,10 @@ const navigationStack = () => (
     <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
       })}
       name="Login"
       component={Login}
@@ -95,6 +151,10 @@ const navigationStack = () => (
     <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
       })}
       name="Welcome"
       component={Welcome}

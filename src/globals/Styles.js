@@ -18,6 +18,7 @@ export const fonts = {
     arial:'Arial',
     airalItalic:'ArialItalic',
     avenRomam:'AvenirLTStdRoman',
+    helveticaNeueBold:'HelveticaNeueBold',
 };
 export const padding = {
     

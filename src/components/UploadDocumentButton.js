@@ -46,11 +46,11 @@ export default function UploadDocumentButton({
      
       >
         <Text
-          style={{color: 'black', fontSize: RFValue (15), fontWeight: 'bold'}}
+          style={{color: '#070606', fontSize: RFValue (14),fontFamily:fonts.arial}}
         >
           {headingText}
         </Text>
-        <Text style={{color: 'black', fontSize: RFValue (12)}}>
+        <Text style={{color: '#070606', fontSize: RFValue (12),fontFamily:fonts.airalItalic}}>
           {subHeadingText}
         </Text>
 
