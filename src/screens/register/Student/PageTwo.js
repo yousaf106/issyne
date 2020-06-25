@@ -12,14 +12,23 @@ import Dropdown from '../../../components/Dropdown';
 import DocumentPicker from '../../../components/DocumentPicker';
 import {errors} from '../../../globals/Errors';
 import {validatePhoneNumber} from '../../../globals/Functions';
-
+import Api from '../../../network/Api';
 export default class PageOne extends Component {
+  componentDidMount = () => {
+    console.warn (this.props.route.params);
+  };
   constructor (props) {
     super (props);
     this.state = {
       uri: '',
       phoneNoText: '',
       phoneError: '',
+      firstNameText: '',
+      lastNameText: '',
+      dateOfBirthText: '',
+      userNameText: '',
+      educationalLevelText: '',
+      cityText: '',
     };
   }
 
@@ -53,13 +62,23 @@ export default class PageOne extends Component {
               (2/2)
             </Text>
           </View>
-          <TextField placeholder="First Name" helperText="Enter First Name" />
+          <TextField
+            value={this.state.firstNameText}
+            onChangeText={text => this.setState ({firstNameText: text})}
+            placeholder="First Name"
+            helperText="Enter First Name"
+          />
           <View style={{marginTop: -30}}>
-            <TextField placeholder="Last Name" helperText="Enter Last Name" />
+            <TextField
+              value={this.state.lastNameText}
+              onChangeText={text => this.setState ({lastNameText: text})}
+              placeholder="Last Name"
+              helperText="Enter Last Name"
+            />
           </View>
           <DatePicker
             placeholder={'Date of Birth'}
-            onChange={value => console.warn (value)}
+            onChange={value => this.setState ({dateOfBirthText: value})}
           />
 
           <Dropdown
@@ -68,9 +87,15 @@ export default class PageOne extends Component {
               {label: 'Item 2', value: 'item2'},
             ]}
             placeholder="Educational Level"
-            onChangeItem={item => console.warn (item)}
+            onChangeItem={item =>
+              this.setState ({educationalLevelText: item.value})}
           />
-          <TextField placeholder="City" helperText="Enter City Name" />
+          <TextField
+            value={this.state.cityText}
+            onChangeText={text => this.setState ({cityText: text})}
+            placeholder="City"
+            helperText="Enter City Name"
+          />
           <NumericField
             placeholder="Phone Number"
             helperText="Enter Phone Number"
@@ -84,14 +109,14 @@ export default class PageOne extends Component {
               else this.setState ({phoneError: ''});
             }}
             value={this.state.phoneNoText}
-            maxLength = {10}
+            maxLength={10}
             onChangeText={async text => {
-             await this.setState ({phoneNoText: text});
+              await this.setState ({phoneNoText: text});
               if (validatePhoneNumber (text)) {
-                console.warn('inside If')
+                console.warn ('inside If');
                 this.setState ({phoneError: ''});
               } else {
-                console.warn('inside Else')
+                console.warn ('inside Else');
 
                 this.setState ({phoneError: errors.PHONE_ERROR});
               }
@@ -111,7 +136,12 @@ export default class PageOne extends Component {
           </Text>
 
           <View style={{marginTop: -30}}>
-            <TextField placeholder="Username" helperText="Enter Username" />
+            <TextField
+              value={this.state.userNameText}
+              onChangeText={text => this.setState ({userNameText: text})}
+              placeholder="Username"
+              helperText="Enter Username"
+            />
           </View>
 
           <DocumentPicker
@@ -122,7 +152,47 @@ export default class PageOne extends Component {
             }}
           />
           <View center>
-            <ButtonLarge onPress={() => {}} label={'Complete'} />
+            <ButtonLarge
+              onPress={async () => {
+                let formdata = new FormData ();
+                const {email, password} = this.props.route.params;
+                formdata.append ('email', email);
+                formdata.append ('password', password);
+                formdata.append ('firstName', this.state.firstNameText);
+                formdata.append ('lastName', this.state.lastNameText);
+                formdata.append ('dateOfBirth', this.state.dateOfBirthText);
+                formdata.append (
+                  'educationLevel',
+                  this.state.educationalLevelText
+                );
+                formdata.append ('city', this.state.cityText);
+                formdata.append ('phoneNumber', this.state.phoneNoText);
+                formdata.append ('username', this.state.userNameText);
+                //  formdata.append ('profileImage', this.state.uri);
+
+                // formdata.append ('profileImage', {
+                //   name: this.state.uri.name,
+                //   type: this.state.uri.type,
+                //   uri: Platform.OS === 'android'
+                //     ? this.state.uri.uri
+                //     : this.state.uri.uri.replace ('file://', ''),
+                // });
+
+                fetch('http://192.168.1.3:3000/student/register',{
+                  method: 'post',
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+                  body: formdata
+                  }).then(response => {
+                    console.log("image uploaded")
+                  }).catch(err => {
+                    console.log(err)
+                  })  
+                
+              }}
+              label={'Complete'}
+            />
 
           </View>
         </ScrollView>

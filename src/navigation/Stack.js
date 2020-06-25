@@ -34,6 +34,22 @@ const Stack = createStackNavigator ();
 const navigationStack = () => (
   <Stack.Navigator>
 
+
+
+<Stack.Screen
+      options={({navigation}) => ({
+        headerShown: false,
+        transitionSpec: {
+          open: config,
+          close: config,
+        },
+      })}
+      name="Registration"
+      component={Registration}
+    />
+
+
+
 <Stack.Screen
       options={({navigation}) => ({
         headerShown: false,
@@ -47,17 +63,6 @@ const navigationStack = () => (
     />
 
 
-    <Stack.Screen
-      options={({navigation}) => ({
-        headerShown: false,
-        transitionSpec: {
-          open: config,
-          close: config,
-        },
-      })}
-      name="Registration"
-      component={Registration}
-    />
 
     <Stack.Screen
       options={({navigation}) => ({

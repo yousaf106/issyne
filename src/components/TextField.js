@@ -10,11 +10,13 @@ export default function SimpleTextField({
   onChangeText = null,
   floatngTextColor = colors.primary,
   placeholderColor = colors.primary,
+  value = '',
 }) {
   return (
     <View>
 
       <TextField
+        value = {value}
         style={{fontFamily: fonts.sfuiTextMeduim}}
         placeholder={placeholder}
         expandable={false}

@@ -18,7 +18,7 @@ export default function FilePicker({
           const res = await DocumentPicker.pick ({
             type: [DocumentPicker.types.images],
           });
-          onReceiveUri (res.uri);
+          onReceiveUri (res);
           console.log (
             res.uri,
             res.type, // mime type

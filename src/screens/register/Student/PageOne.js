@@ -16,6 +16,8 @@ import Heading from '../../../components/Heading';
 import {RFValue} from 'react-native-responsive-fontsize';
 import SocialButton from '../../../components/SocialButton';
 import {errors} from '../../../globals/Errors';
+import {validateEmail} from '../../../globals/Functions';
+import Toast from 'react-native-simple-toast';
 export default class PageOne extends Component {
   constructor (props) {
     super (props);
@@ -62,7 +64,7 @@ export default class PageOne extends Component {
           <EmailField
             value={this.state.emailText}
             onChangeText={text => this.setState ({emailText: text})}
-            onError={error => console.warn (error)}
+            onError={isEmailValid => {}}
           />
           <PasswordField
             value={this.state.passwordText}
@@ -79,21 +81,15 @@ export default class PageOne extends Component {
             error={this.state.passwordErrorText}
             onChangeText={async text => {
               this.setState ({passwordText: text});
-            
-            
-            
-            
+
               if (text != this.state.confirmPasswordText) {
                 await this.setState ({
-                   confirmPassworErrorText: errors.PASSWORD_NOT_MATCH,
-                 });
-               }
-               if (text === this.state.confirmPasswordText) {
+                  confirmPassworErrorText: errors.PASSWORD_NOT_MATCH,
+                });
+              }
+              if (text === this.state.confirmPasswordText) {
                 await this.setState ({confirmPassworErrorText: ''});
-               }
-            
-            
-            
+              }
             }}
           />
           <PasswordField
@@ -109,17 +105,16 @@ export default class PageOne extends Component {
             onChangeText={async text => {
               await this.setState ({confirmPasswordText: text});
 
-        
-                if(text.length!=0)
+              if (text.length != 0)
                 await this.setState ({confirmPassworErrorText: ''});
-              
+
               if (text != this.state.passwordText) {
-               await this.setState ({
+                await this.setState ({
                   confirmPassworErrorText: errors.PASSWORD_NOT_MATCH,
                 });
               }
               if (text === this.state.passwordText) {
-               await this.setState ({confirmPassworErrorText: ''});
+                await this.setState ({confirmPassworErrorText: ''});
               }
             }}
             onFocus={() => {
@@ -128,14 +123,20 @@ export default class PageOne extends Component {
                   confirmPassworErrorText: errors.PASSWORD_EMPTY,
                 });
               else this.setState ({confirmPassworErrorText: ''});
-
-                          }}
+            }}
             placeholder={'Confirm the Password'}
           />
 
           <View center>
             <ButtonLarge
-              onPress={() => this.props.navigation.navigate ('PageTwoStudent')}
+              onPress={async () => {
+                if (this.areAllfieldsFilled () && this.areAllFieldsClear ())
+                  this.props.navigation.navigate ('PageTwoStudent', {
+                    email: this.state.emailText,
+                    password: this.state.passwordText,
+                  });
+                else Toast.show ('All Fields Are Mandatory');
+              }}
               label={'CONTINUE'}
             />
             <View style={{marginTop: margin.vertical}} />
@@ -166,4 +167,21 @@ export default class PageOne extends Component {
       </View>
     );
   }
+  areAllfieldsFilled = () => {
+    if (
+      this.state.emailText.length != 0 &&
+      this.state.passwordText.length != 0 &&
+      this.state.confirmPasswordText.length != 0
+    ) {
+      return true;
+    } else return false;
+  };
+  areAllFieldsClear = () => {
+    if (
+      this.state.confirmPasswordText === this.state.passwordText &&
+      validateEmail (this.state.emailText)
+    )
+      return true;
+    return false;
+  };
 }
