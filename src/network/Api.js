@@ -13,32 +13,23 @@ class Api {
     return this.func (route, null, 'GET');
   }
 
-  static async postFormData (endPoint,formdata) {
-    const url = host+endPoint;
-    console.warn(url)
-    return fetch (url, {
-      method: 'post',
+  static async postFormData (endPoint, formdata) {
+    return fetch (host + endPoint, {
+      method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        // 'Content-Type': 'multipart/form-data',
       },
       body: formdata,
     })
-      .then (resp => {
-        console.log ('Api response is ------------->>>>>>', resp);
+      .then (response => {
+        let json = response.json ();
 
-        let json = resp.json ();
-
-        if (resp.ok) {
+        if (response.ok) {
           return json;
         }
-
-        return json.then (err => {
-          return null;
-        });
       })
-      .catch (json => {
-        console.log ('Api response is ------------->>>>>>', json);
-
+      .catch (err => {
+        console.log (err.message);
         return null;
       });
   }

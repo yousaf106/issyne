@@ -22,9 +22,9 @@ export default class PageOne extends Component {
   constructor (props) {
     super (props);
     this.state = {
-      emailText: '',
-      passwordText: '',
-      confirmPasswordText: '',
+      emailText: 'a@a.com',
+      passwordText: '1',
+      confirmPasswordText: '1',
       passwordErrorText: '',
       confirmPassworErrorText: '',
     };

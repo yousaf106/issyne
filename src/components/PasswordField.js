@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {TextField,View} from 'react-native-ui-lib';
-import {colors, fonts,margin} from '../globals/Styles';
+import {TextField, View} from 'react-native-ui-lib';
+import {colors, fonts, margin} from '../globals/Styles';
 import {RFValue} from 'react-native-responsive-fontsize';
 
 export default function PasswordField({
@@ -13,10 +13,12 @@ export default function PasswordField({
   error = '',
   onFocus = null,
   onEmptyPasswordError = null,
+  value = {value},
 }) {
   return (
-    <View style = {{marginTop:-20}}>
+    <View style={{marginTop: -20}}>
       <TextField
+        value={value}
         style={{fontFamily: fonts.sfuiTextMeduim}}
         placeholder={placeholder}
         expandable={false}
@@ -29,14 +31,14 @@ export default function PasswordField({
         placeholderTextColor={placeholderColor}
         floatingPlaceholderColor={floatngTextColor}
         floatOnFocus={true}
-        onChangeText={(text)=>{
-          onChangeText(text);
-          if(onEmptyPasswordError!=null){
-            onEmptyPasswordError(text.length === 0)
+        onChangeText={text => {
+          onChangeText (text);
+          if (onEmptyPasswordError != null) {
+            onEmptyPasswordError (text.length === 0);
           }
         }}
-        error = {error}
-        onFocus = {onFocus}
+        error={error}
+        onFocus={onFocus}
       />
     </View>
   );

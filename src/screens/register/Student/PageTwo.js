@@ -21,14 +21,14 @@ export default class PageOne extends Component {
     super (props);
     this.state = {
       uri: '',
-      phoneNoText: '',
+      phoneNoText: '0000000000',
       phoneError: '',
-      firstNameText: '',
-      lastNameText: '',
+      firstNameText: 'a',
+      lastNameText: 'a',
       dateOfBirthText: '',
-      userNameText: '',
+      userNameText: 'a',
       educationalLevelText: '',
-      cityText: '',
+      cityText: 'a',
     };
   }
 
@@ -78,6 +78,7 @@ export default class PageOne extends Component {
           </View>
           <DatePicker
             placeholder={'Date of Birth'}
+            
             onChange={value => this.setState ({dateOfBirthText: value})}
           />
 
@@ -145,7 +146,7 @@ export default class PageOne extends Component {
           </View>
 
           <DocumentPicker
-            value={this.state.uri}
+            value={this.state.uri.uri}
             placeholder="Picture"
             onReceiveUri={uri => {
               if (uri != null) this.setState ({uri: uri});
@@ -160,36 +161,32 @@ export default class PageOne extends Component {
                 formdata.append ('password', password);
                 formdata.append ('firstName', this.state.firstNameText);
                 formdata.append ('lastName', this.state.lastNameText);
-                formdata.append ('dateOfBirth', this.state.dateOfBirthText);
+                formdata.append ('dateOfBirth', '12-12-12');
                 formdata.append (
                   'educationLevel',
-                  this.state.educationalLevelText
+                  'inter'
                 );
                 formdata.append ('city', this.state.cityText);
                 formdata.append ('phoneNumber', this.state.phoneNoText);
                 formdata.append ('username', this.state.userNameText);
-                //  formdata.append ('profileImage', this.state.uri);
+                const photo = {
 
-                // formdata.append ('profileImage', {
-                //   name: this.state.uri.name,
-                //   type: this.state.uri.type,
-                //   uri: Platform.OS === 'android'
-                //     ? this.state.uri.uri
-                //     : this.state.uri.uri.replace ('file://', ''),
-                // });
+                  uri: this.state.uri.uri,
+                  type: this.state.uri.type,
+                  name: this.state.uri.name,
+                };
+                console.log(JSON.stringify(photo))
 
-                fetch('http://192.168.1.3:3000/student/register',{
-                  method: 'post',
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                  },
-                  body: formdata
-                  }).then(response => {
-                    console.log("image uploaded")
-                  }).catch(err => {
-                    console.log(err)
-                  })  
-                
+                formdata.append ('profileImage', photo);
+ 
+                try{
+                  const response = await Api.postFormData('register',formdata);
+                  console.warn(response);
+                 // console.warn(JSON.stringify(response));
+                }
+                catch(err){
+
+                }
               }}
               label={'Complete'}
             />

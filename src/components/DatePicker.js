@@ -25,6 +25,7 @@ export default function DatePicker({
         placeholder={placeholder}
         mode = 'date'
         showIcon = {true}
+        
       />
       <Image
       style = {{position:'absolute',width:20,height:20,alignSelf:'flex-end'}} 
