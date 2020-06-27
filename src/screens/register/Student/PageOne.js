@@ -22,9 +22,9 @@ export default class PageOne extends Component {
   constructor (props) {
     super (props);
     this.state = {
-      emailText: 'a@a.com',
-      passwordText: '1',
-      confirmPasswordText: '1',
+      emailText: '',
+      passwordText: '',
+      confirmPasswordText: '',
       passwordErrorText: '',
       confirmPassworErrorText: '',
     };
@@ -168,6 +168,7 @@ export default class PageOne extends Component {
     );
   }
   areAllfieldsFilled = () => {
+
     if (
       this.state.emailText.length != 0 &&
       this.state.passwordText.length != 0 &&

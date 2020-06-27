@@ -11,9 +11,14 @@ export default function SimpleTextField({
   floatngTextColor = colors.primary,
   placeholderColor = colors.primary,
   value = '',
+  error = 'This Field Is Required',
+  onFocus = null,
+  onEmptyTextError = null,
+  onError = null,
+  showError = false,
 }) {
   return (
-    <View>
+    <View style={{marginBottom:error.length!=0 ? 20:0  }}>
 
       <TextField
         value = {value}
@@ -27,7 +32,28 @@ export default function SimpleTextField({
         placeholderTextColor={placeholderColor}
         floatingPlaceholderColor={floatngTextColor}
         floatOnFocus={true}
-        onChangeText={onChangeText}
+        onChangeText={text => {
+          onChangeText (text);
+          if(onError!=null)
+          {
+            onError(text.length === 0)
+            if(text.length === 0)
+                showError = true;
+                else
+                showError = false;
+          }
+        }}
+        error={!showError ? '':error}
+        onFocus={()=>{
+          if(onError!=null)
+          {
+            onError(value.length === 0)
+            if(value.length === 0)
+              showError = true;
+              else
+              showError = false;
+          }
+        }}        
       />
     </View>
   );

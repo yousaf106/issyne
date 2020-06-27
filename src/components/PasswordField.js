@@ -16,7 +16,7 @@ export default function PasswordField({
   value = {value},
 }) {
   return (
-    <View style={{marginTop: -20}}>
+    <View style={{marginTop: -20,marginBottom:error.length!=0 ? 20:0  }}>
       <TextField
         value={value}
         style={{fontFamily: fonts.sfuiTextMeduim}}

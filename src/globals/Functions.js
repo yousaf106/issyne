@@ -13,3 +13,7 @@ export function validatePhoneNumber (phoneNumber) {
   if (phoneNumber.startsWith ('0') && phoneNumber.length === 10) return true;
   return false;
 }
+export function toDate(dateStr) {
+  var parts = dateStr.split("-")
+  return new Date(parts[2], parts[1] - 1, parts[0])
+}

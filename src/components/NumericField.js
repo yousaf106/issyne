@@ -17,7 +17,7 @@ export default function NumericField({
   maxLength = null,
 }) {
   return (
-    <View style={{marginTop: -30}}>
+    <View style={{marginTop: -30,marginBottom:error.length!=0 ? 20:0}}>
 
       <TextField
       value = {value}

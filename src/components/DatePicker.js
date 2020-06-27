@@ -10,6 +10,8 @@ export default function DatePicker({
   textColor = colors.primary,
   placeholderColor = colors.primary,
   title = '',
+  value = '',
+
 }) {
   return (
     <View style={{marginTop: 0}}>
@@ -17,6 +19,7 @@ export default function DatePicker({
       <DateTimePicker
         editable={true}
         dateFormat = {'DD-MM-YYYY'}
+        value = {value}
         style={{color: textColor}}
         title={title}
         underlineColor={underlineColor}
