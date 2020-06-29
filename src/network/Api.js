@@ -1,5 +1,5 @@
 import {Platform, Alert} from 'react-native';
-const host = 'http://192.168.1.3:3000/student/';
+const host = 'http://192.168.1.3:3000/teacher/';
 
 class Api {
   static async headers () {
@@ -11,6 +11,9 @@ class Api {
 
   static get (route) {
     return this.func (route, null, 'GET');
+  }
+  static post(route, params) {
+    return this.func(route, params, 'POST')
   }
 
   static async postFormData (endPoint, formdata) {

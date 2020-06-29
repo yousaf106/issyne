@@ -3,6 +3,7 @@ import {TextField, View} from 'react-native-ui-lib';
 import {colors, fonts, margin} from '../globals/Styles';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {emailValid, validateEmail} from '../globals/Functions';
+import {errors} from '../globals/Errors';
 export default function EmailField({
   placeholder = 'E-mail address',
   helperText = 'Enter Email',
@@ -11,11 +12,11 @@ export default function EmailField({
   placeholderColor = colors.primary,
   value = '',
   onChangeText = null,
-  errorText = 'Enter a valid email',
   onError = null,
+  showError = false,
 }) {
   return (
-    <View style={{marginTop: -5, marginBottom: errorText.length != 0 ? 20 : 0}}>
+    <View style={{marginTop: -5, marginBottom: showError ? 20 : 0}}>
 
       <TextField
         style={{fontFamily: fonts.sfuiTextMeduim}}
@@ -29,16 +30,25 @@ export default function EmailField({
         placeholderTextColor={placeholderColor}
         floatingPlaceholderColor={floatngTextColor}
         floatOnFocus={true}
+        keyboardType="email-address"
         onChangeText={text => {
           onChangeText (text);
           if (onError != null) {
-            onError (validateEmail (text));
+            onError (text.length === 0);
+            if (text.length === 0) showError = true;
+            else showError = false;
+            onError (!validateEmail (text));
           }
         }}
-        keyboardType="email-address"
-        error={
-          value.length != 0 ? (!validateEmail (value) ? errorText : '') : null
-        }
+        onFocus={() => {
+          if (onError != null) {
+            onError (value.length === 0);
+            if (value.length === 0) showError = true;
+            else showError = false;
+            onError (!validateEmail (value));
+          }
+        }}
+        error={!showError ? '' : errors.INVALID_EMAIL}
       />
     </View>
   );

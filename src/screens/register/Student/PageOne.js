@@ -27,6 +27,11 @@ export default class PageOne extends Component {
       confirmPasswordText: '',
       passwordErrorText: '',
       confirmPassworErrorText: '',
+
+      showPasswordError: false,
+      showConfirmPasswordError: false,
+
+      showEmailError: false,
     };
   }
 
@@ -64,65 +69,109 @@ export default class PageOne extends Component {
           <EmailField
             value={this.state.emailText}
             onChangeText={text => this.setState ({emailText: text})}
-            onError={isEmailValid => {}}
+            onError={error => {
+              this.setState ({showEmailError: error});
+            }}
+            showError={this.state.showEmailError}
           />
           <PasswordField
             value={this.state.passwordText}
             onFocus={() => {
               if (this.state.passwordText.length === 0) {
-                this.setState ({passwordErrorText: errors.PASSWORD_EMPTY});
-              } else this.setState ({passwordErrorText: ''});
+                this.setState ({
+                  passwordErrorText: errors.PASSWORD_EMPTY,
+                  showPasswordError: true,
+                });
+              } else
+                this.setState ({
+                  passwordErrorText: '',
+                  showPasswordError: false,
+                });
             }}
             onEmptyPasswordError={isEmpty => {
               if (isEmpty)
-                this.setState ({passwordErrorText: errors.PASSWORD_EMPTY});
-              else this.setState ({passwordErrorText: ''});
+                this.setState ({
+                  passwordErrorText: errors.PASSWORD_EMPTY,
+                  showPasswordError: true,
+                });
+              else
+                this.setState ({
+                  passwordErrorText: '',
+                  showPasswordError: false,
+                });
             }}
-            error={this.state.passwordErrorText}
+            error={
+              this.state.showPasswordError ? this.state.passwordErrorText : ''
+            }
             onChangeText={async text => {
               this.setState ({passwordText: text});
 
               if (text != this.state.confirmPasswordText) {
                 await this.setState ({
                   confirmPassworErrorText: errors.PASSWORD_NOT_MATCH,
+                  showConfirmPasswordError: true,
                 });
               }
               if (text === this.state.confirmPasswordText) {
-                await this.setState ({confirmPassworErrorText: ''});
+                await this.setState ({
+                  confirmPassworErrorText: '',
+                  showConfirmPasswordError: false,
+                });
               }
             }}
           />
           <PasswordField
-            error={this.state.confirmPassworErrorText}
+            error={
+              this.state.showConfirmPasswordError
+                ? this.state.confirmPassworErrorText
+                : ''
+            }
             value={this.state.confirmPasswordText}
             onEmptyPasswordError={isEmpty => {
               if (isEmpty)
                 this.setState ({
                   confirmPassworErrorText: errors.PASSWORD_EMPTY,
+                  showConfirmPasswordError: true,
                 });
-              else this.setState ({confirmPassworErrorText: ''});
+              else
+                this.setState ({
+                  confirmPassworErrorText: '',
+                  showConfirmPasswordError: false,
+                });
             }}
             onChangeText={async text => {
               await this.setState ({confirmPasswordText: text});
 
               if (text.length != 0)
-                await this.setState ({confirmPassworErrorText: ''});
+                await this.setState ({
+                  confirmPassworErrorText: '',
+                  showConfirmPasswordError: false,
+                });
 
               if (text != this.state.passwordText) {
                 await this.setState ({
                   confirmPassworErrorText: errors.PASSWORD_NOT_MATCH,
+                  showConfirmPasswordError: true,
                 });
               }
               if (text === this.state.passwordText) {
-                await this.setState ({confirmPassworErrorText: ''});
+                await this.setState ({
+                  confirmPassworErrorText: '',
+                  showConfirmPasswordError: false,
+                });
               }
             }}
             onFocus={() => {
               if (this.state.confirmPasswordText.length === 0)
                 this.setState ({
                   confirmPassworErrorText: errors.PASSWORD_EMPTY,
+                  showConfirmPasswordError: true,
                 });
-              else this.setState ({confirmPassworErrorText: ''});
+              else
+                this.setState ({
+                  confirmPassworErrorText: '',
+                  showConfirmPasswordError: false,
+                });
             }}
             placeholder={'Confirm the Password'}
           />
@@ -130,7 +179,8 @@ export default class PageOne extends Component {
           <View center>
             <ButtonLarge
               onPress={async () => {
-                if (this.areAllfieldsFilled () && this.areAllFieldsClear ())
+                await this.areAllfieldsFilled ();
+                if (this.areAllFieldsClear ())
                   this.props.navigation.navigate ('PageTwoStudent', {
                     email: this.state.emailText,
                     password: this.state.passwordText,
@@ -168,21 +218,57 @@ export default class PageOne extends Component {
     );
   }
   areAllfieldsFilled = () => {
+    if (this.state.emailText.length != 0) {
+      this.setState ({showEmailError: false});
+    } else this.setState ({showEmailError: true});
 
+    if (this.state.passwordText.length === 0) {
+      this.setState ({
+        showPasswordError: true,
+        passwordErrorText: errors.PASSWORD_EMPTY,
+      });
+    } else
+      this.setState ({
+        showPasswordError: false,
+        passwordErrorText: '',
+      });
+
+    if (this.state.confirmPasswordText.length === 0) {
+      this.setState ({
+        showConfirmPasswordError: true,
+        confirmPassworErrorText: errors.PASSWORD_EMPTY,
+      });
+    } else
+      this.setState ({
+        showConfirmPasswordError: false,
+        confirmPassworErrorText: '',
+      });
+    if (validateEmail (this.state.emailText))
+      this.setState ({showEmailError: false});
+    else this.setState ({showEmailError: true});
     if (
-      this.state.emailText.length != 0 &&
+      this.state.confirmPasswordText.length != 0 &&
       this.state.passwordText.length != 0 &&
-      this.state.confirmPasswordText.length != 0
-    ) {
-      return true;
-    } else return false;
+      this.state.confirmPasswordText === this.state.passwordText
+    )
+      this.setState ({
+        showConfirmPasswordError: false,
+        confirmPassworErrorText: '',
+      });
+    else
+      this.setState ({
+        showConfirmPasswordError: true,
+        confirmPassworErrorText: errors.PASSWORD_NOT_MATCH,
+      });
   };
   areAllFieldsClear = () => {
     if (
-      this.state.confirmPasswordText === this.state.passwordText &&
-      validateEmail (this.state.emailText)
+      !this.state.showEmailError &&
+      !this.state.showPasswordError &&
+      !this.state.confirmPassworErrorText
     )
       return true;
+
     return false;
   };
 }

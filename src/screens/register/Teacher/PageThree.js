@@ -1,17 +1,33 @@
 import React, {Component} from 'react';
 import {View, Text, Colors} from 'react-native-ui-lib';
-import {ScrollView} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import ButtonLarge from '../../../components/ButtonLarge';
 import {padding, margin, fonts, colors} from '../../../globals/Styles';
 import Heading from '../../../components/Heading';
 import Title from '../../../components/Title';
-
+import {errors} from '../../../globals/Errors';
 import {RFValue} from 'react-native-responsive-fontsize';
+import ErrorText from '../../../components/ErrorText';
 import DocumentPicker from '../../../components/DocumentPicker';
-
+import Api from '../../../network/Api';
 import CheckBox from '../../../components/Checkbox';
 import UploadDocumentButton from '../../../components/UploadDocumentButton';
+const courseLabels = {
+  primaire: 'Primaire',
+  lycee: 'Lycee',
+  college: 'College',
+  university: 'Universitie',
+};
+const metrics = {
+  math: 'Mathematics',
+  pyh: 'Physice',
+  svt: 'SVT',
+  french: 'Frence',
+  matter5: 'Matter 5',
+  matter6: 'Matter 6',
+};
 export default class PageThree extends Component {
+  componentDidMount = () => {};
   constructor (props) {
     super (props);
     this.state = {
@@ -26,6 +42,17 @@ export default class PageThree extends Component {
       frenchSelected: false,
       matterFiveSelected: false,
       matterSixSelected: false,
+
+      courses: [],
+      showCoursesError: false,
+      metrics: [],
+      showMetricsError: false,
+      idUri: '',
+      showIdUriError: false,
+      kbisUri: '',
+      showKbisUriError: false,
+      diplomaUri: '',
+      showDiplomaUriError: false,
     };
   }
 
@@ -59,28 +86,29 @@ export default class PageThree extends Component {
               (3/3)
             </Text>
           </View>
-             <View style = {{marginTop:30}}/> 
+          <View style={{marginTop: 30}} />
           <Title title="You want to provide course for:" />
           <View row style={{flexDirection: 'row', marginTop: 20}}>
             <CheckBox
               checked={this.state.primitiveSelected}
               onValueChanged={primitiveSelected =>
                 this.setState ({primitiveSelected})}
-              label="Primaire"
+              label={courseLabels.primaire}
               onPress={() =>
                 this.setState ({
                   primitiveSelected: !this.state.primitiveSelected,
                 })}
             />
+
             <CheckBox
               checked={this.state.lyceeSelected}
               onValueChanged={lyceeSelected => this.setState ({lyceeSelected})}
-              label="Lycee"
+              label={courseLabels.lycee}
               onPress={() =>
                 this.setState ({lyceeSelected: !this.state.lyceeSelected})}
             />
           </View>
-         
+
           <View row style={{flexDirection: 'row', marginTop: 15}}>
             <CheckBox
               checked={this.state.collegeSelected}
@@ -88,21 +116,23 @@ export default class PageThree extends Component {
                 this.setState ({collegeSelected: !this.state.collegeSelected})}
               onValueChanged={collegeSelected =>
                 this.setState ({collegeSelected})}
-              label="College"
+              label={courseLabels.college}
             />
             <CheckBox
               onPress={() =>
-                this.setState ({collegeSelected: !this.state.collegeSelected})}
+                this.setState ({
+                  universitySelected: !this.state.universitySelected,
+                })}
               checked={this.state.universitySelected}
               onValueChanged={universitySelected =>
                 this.setState ({universitySelected})}
-              label="Universitie"
+              label={courseLabels.university}
             />
           </View>
-
-
-          <View style = {{marginTop:30}}/> 
-
+          {this.state.showCoursesError
+            ? <ErrorText error={errors.CHECKBOX_ERROR} />
+            : null}
+          <View style={{marginTop: 30}} />
 
           <Title title="Metrics You want to teach:" />
           <View row style={{flexDirection: 'row', marginTop: 20}}>
@@ -114,7 +144,7 @@ export default class PageThree extends Component {
               checked={this.state.mathematicsSelected}
               onValueChanged={mathematicsSelected =>
                 this.setState ({mathematicsSelected})}
-              label="Mathematics"
+              label={metrics.math}
             />
             <CheckBox
               onPress={() =>
@@ -122,7 +152,7 @@ export default class PageThree extends Component {
               checked={this.state.physicsSlected}
               onValueChanged={physicsSlected =>
                 this.setState ({physicsSlected})}
-              label="Physice"
+              label={metrics.pyh}
             />
           </View>
           <View row style={{flexDirection: 'row', marginTop: 15}}>
@@ -131,7 +161,7 @@ export default class PageThree extends Component {
                 this.setState ({svtSelected: !this.state.svtSelected})}
               checked={this.state.svtSelected}
               onValueChanged={svtSelected => this.setState ({svtSelected})}
-              label="SVT"
+              label={metrics.svt}
             />
             <CheckBox
               onPress={() =>
@@ -139,7 +169,7 @@ export default class PageThree extends Component {
               checked={this.state.frenchSelected}
               onValueChanged={frenchSelected =>
                 this.setState ({frenchSelected})}
-              label="French"
+              label={metrics.french}
             />
           </View>
 
@@ -152,7 +182,7 @@ export default class PageThree extends Component {
               checked={this.state.matterFiveSelected}
               onValueChanged={matterFiveSelected =>
                 this.setState ({matterFiveSelected})}
-              label="Matter5"
+              label={metrics.matter5}
             />
             <CheckBox
               onPress={() =>
@@ -162,45 +192,76 @@ export default class PageThree extends Component {
               checked={this.state.matterSixSelected}
               onValueChanged={matterSixSelected =>
                 this.setState ({matterSixSelected})}
-              label="Matter6"
+              label={metrics.matter6}
             />
           </View>
-          <View style = {{marginTop:30}}/> 
+
+          {this.state.showMetricsError
+            ? <ErrorText error={errors.CHECKBOX_ERROR} />
+            : null}
+
+          <View style={{marginTop: 30}} />
 
           <Title title="Documents to upload:" />
-          <View style = {{marginTop:20}}/> 
+          <View style={{marginTop: 20}} />
 
           <UploadDocumentButton
             headingText="ID Card"
             subHeadingText="1 document uploaded"
             onReceiveUri={uri => {
-              if (uri != null) console.warn (uri);
+              if (uri != null) {
+                this.setState ({idUri: uri});
+              } else this.setState ({idUri: ''});
             }}
           />
-                    <View style = {{marginTop:10}}/> 
+
+          {this.state.showIdUriError
+            ? <ErrorText error={errors.DOCUMENT_ERROR} />
+            : null}
+
+          <View style={{marginTop: 10}} />
 
           <UploadDocumentButton
             headingText="K-Bis"
             subHeadingText="0 document uploaded"
             onReceiveUri={uri => {
-              if (uri != null) console.warn (uri);
+              if (uri != null) {
+                this.setState ({kbisUri: uri, showKbisUriError: true});
+              }
+              else
+              this.setState ({kbisUri: '', showKbisUriError: false});
             }}
           />
-                    <View style = {{marginTop:10}}/> 
+
+          {this.state.showKbisUriError
+            ? <ErrorText error={errors.DOCUMENT_ERROR} />
+            : null}
+
+          <View style={{marginTop: 10}} />
 
           <UploadDocumentButton
             headingText="Diploma"
             subHeadingText="0 document uploaded"
             onReceiveUri={uri => {
-              if (uri != null) console.warn (uri);
+              if (uri != null) this.setState ({diplomaUri: uri});
+              else this.setState ({diplomaUri: ''});
             }}
           />
 
-<View style = {{marginTop:20}}/> 
+          {this.state.showDiplomaUriError
+            ? <ErrorText error={errors.DOCUMENT_ERROR} />
+            : null}
+
+          <View style={{marginTop: 20}} />
 
           <View center>
             <ButtonLarge
-              onPress={() => this.props.navigation.navigate ('PageThree')}
+              onPress={async () => {
+                await this.postFormData ();
+                await this.areAllFieldsClear ();
+                if (this.hasNoError ()) {
+                } else console.warn ('error');
+              }}
               label={'COMPLETE'}
             />
             <View style={{marginTop: margin.vertical}} />
@@ -210,4 +271,126 @@ export default class PageThree extends Component {
       </View>
     );
   }
+
+  postFormData = async () => {
+    const {
+      email,
+      password,
+      fName,
+      lastName,
+      date,
+      status,
+      address,
+      phone,
+      exp,
+      uri,
+    } = this.props.route.params;
+
+    let formdata = new FormData ();
+    formdata.append ('email', email);
+    formdata.append ('password', password);
+    formdata.append ('firstName', fName);
+    formdata.append ('lastName', lastName);
+    formdata.append ('dateOfBirth', '10-6-1991');
+    formdata.append ('currentStatus', status);
+    formdata.append ('address', address);
+    formdata.append ('phoneNumber', phone);
+    formdata.append ('experience', exp);
+    const avatar = JSON.parse (uri);
+
+    formdata.append ('metrics', this.state.metrics);
+    formdata.append ('courses', this.state.courses);
+
+    const profilePhoto = {
+      uri: avatar.uri,
+      type: avatar.type,
+      name: avatar.name,
+    };
+
+    const kb = {
+      uri: this.state.kbisUri.uri,
+      type: this.state.kbisUri.type,
+      name: this.state.kbisUri.name,
+    };
+    const diploma = {
+      uri: this.state.diplomaUri.uri,
+      type: this.state.diplomaUri.type,
+      name: this.state.diplomaUri.name,
+    };
+    const id = {
+      uri: this.state.idUri.uri,
+      type: this.state.idUri.type,
+      name: this.state.idUri.name,
+    };
+
+    formdata.append ('profileImage', profilePhoto);
+
+    formdata.append ('idCard', id);
+    formdata.append ('kbis', kb);
+    formdata.append ('diploma', diploma);
+
+    try {
+      const response = await Api.postFormData ('register', formdata);
+      console.warn (response);
+      // console.warn(JSON.stringify(response));
+    } catch (err) {}
+  };
+
+  hasNoError = () => {
+    if (
+      !this.state.showCoursesError &&
+      !this.state.showMetricsError &&
+      !this.state.showIdUriError &&
+      //!this.state.showKbisUriError &&
+      !this.state.showDiplomaUriError
+    )
+      return true;
+    return false;
+  };
+
+  areAllFieldsClear = () => {
+    const selectedCourses = [];
+    if (this.state.primitiveSelected)
+      selectedCourses.push (courseLabels.primaire);
+    if (this.state.lyceeSelected) selectedCourses.push (courseLabels.lycee);
+    if (this.state.collegeSelected) selectedCourses.push (courseLabels.college);
+    if (this.state.universitySelected)
+      selectedCourses.push (courseLabels.university);
+
+    const selectedMetrics = [];
+    if (this.state.mathematicsSelected) selectedMetrics.push (metrics.math);
+    if (this.state.physicsSlected) selectedMetrics.push (metrics.pyh);
+    if (this.state.svtSelected) selectedMetrics.push (metrics.svt);
+    if (this.state.frenchSelected) selectedMetrics.push (metrics.french);
+    if (this.state.matterFiveSelected) selectedMetrics.push (metrics.matter5);
+    if (this.state.matterSixSelected) selectedMetrics.push (metrics.matter6);
+
+    if (selectedCourses.length != 0) {
+      this.setState ({
+        courses: selectedCourses,
+        showCoursesError: false,
+      });
+    } else this.setState ({showCoursesError: true});
+    if (selectedMetrics.length != 0) {
+      this.setState ({
+        metrics: selectedMetrics,
+        showMetricsError: false,
+      });
+    } else this.setState ({showMetricsError: true});
+
+    if (this.state.idUri.length === 0) this.setState ({showIdUriError: true});
+    else this.setState ({showIdUriError: false});
+
+    if (this.state.kbisUri.length === 0)
+      this.setState ({showKbisUriError: true});
+    else this.setState ({showKbisUriError: false});
+
+    if (this.state.diplomaUri.length === 0)
+      this.setState ({showDiplomaUriError: true});
+    else this.setState ({showDiplomaUriError: false});
+  };
 }
+
+const styles = StyleSheet.create ({
+  errorText: {},
+});
